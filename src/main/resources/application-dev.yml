@@ -1,0 +1,72 @@
+debug: true
+server:
+  error:
+    include-message: always
+    include-exception: true
+    include-binding-errors: always
+    include-stacktrace: always
+  port: 8118
+
+logging:
+  level:
+    com.mathias8dev: TRACE
+  file:
+    name: ./logs/dev-${spring.application.name}.log
+
+
+
+
+spring:
+  application:
+    name: notification-sender-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://dev-webfluxblog-authorization-server-service:8112/oauth2/jwks
+          issuer-uri: http://dev-webfluxblog-authorization-server-service:8112
+
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+    username: kalipemathias.pro@gmail.com
+    password: dkab crmr gwqb sjcn
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: false
+
+
+
+
+# Custom
+webfluxblog:
+  gateway:
+    baseurl: http://dev-webfluxblog-gateway-service:8082
+    api-url: http://dev-webfluxblog-gateway-service:8082/api
+
+
+# Eureka client
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://dev-webfluxblog-eureka-server-service:8085/eureka
+  instance:
+    hostname: dev-webfluxblog-eureka-server-service
+    prefer-ip-address: true
+
+
+
+# SMS
+twilio:
+  api:
+    account-sid:
+    auth-token:
+    phone-number:
